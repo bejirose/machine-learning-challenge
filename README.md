@@ -1,96 +1,91 @@
-# Big Data Homework - "Alexa, can you handle big data?"
+# Machine Learning Homework - Exoplanet Exploration
+
+![exoplanets.jpg](Images/exoplanets.jpg)
 
 ### Before You Begin
 
-1. Create a new repository for this project called `big-data-challenge`. **Do not add this homework to an existing repository**.
+1. Create a new repository for this project called `machine-learning-challenge`. **Do not add this homework to an existing repository**.
 
 2. Clone the new repository to your computer.
 
-3. Inside your local git repository, create a directory for the level of challenge Challenge you choose. Use folder names corresponding to the challenges: **level-1** or  **level-2**.
+3. Give each model you choose their own Jupyter notebook, **do not use more than one model per notebook.**
 
-4. Add your converted ZEPL notebook to this folder. This will be the main script to run for analysis. Be sure to also add any SQL queries you used to a `.sql` file and add it to your repo.
+4. Save your best model to a file. This will be the model used to test your accuracy and used for grading.
 
-5. Push the above changes to GitHub or GitLab.
+5. Commit your Jupyter notebooks and model file and push them to GitHub.
 
 ## Note
 
-Keep in mind that this homework is optional! However, you will gain a much greater understanding of ETL processes in Big Data using PySpark and using AWS's Relational Databases if you do complete it.
+Keep in mind that this homework is optional! However, you will gain a much greater understanding of testing and tuning different Classification models if you do complete it.
 
 ## Background
 
-In this assignment you will put your ETL skills to the test. Many of Amazon's shoppers depend on product reviews to make a purchase. Amazon makes these datasets publicly available. However, they are quite large and can exceed the capacity of local machines to handle. One dataset alone contains over 1.5 million rows; with over 40 datasets, this can be quite taxing on the average local computer. Your first goal for this assignment will be to perform the ETL process completely in the cloud and upload a DataFrame to an RDS instance. The second goal will be to use PySpark or SQL to perform a statistical analysis of selected data.
+Over a period of nine years in deep space, the NASA Kepler space telescope has been out on a planet-hunting mission to discover hidden planets outside of our solar system.
 
-There are two levels to this homework assignment. The second level is optional but highly recommended.
+To help process this data, you will create machine learning models capable of classifying candidate exoplanets from the raw dataset.
 
-1. Create DataFrames to match production-ready tables from two big Amazon customer review datasets.
-2. Analyze whether reviews from Amazon's Vine program are trustworthy.
+In this homework assignment, you will need to:
+
+1. [Preprocess the raw data](#Preprocessing)
+2. [Tune the models](#Tune-Model-Parameters)
+3. [Compare two or more models](#Evaluate-Model-Performance)
 
 - - -
 
 ## Instructions
 
-### Level 1
+### Preprocess the Data
 
-* Use the furnished schema to create tables in your RDS database.
+* Preprocess the dataset prior to fitting the model.
+* Perform feature selection and remove unnecessary features.
+* Use `MinMaxScaler` to scale the numerical data.
+* Separate the data into training and testing data.
 
-* Create two separate ZEPL notebooks and **extract** any two datasets from the list at [review dataset](https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt), one into each notebook.
+### Tune Model Parameters
 
-  **Note:** It is possible to ETL both data sources in a single notebook, but due to the large data sizes, it will be easier to work with these S3 data sources in two separate ZEPL notebooks.
+* Use `GridSearch` to tune model parameters.
+* Tune and compare at least two different classifiers.
 
-* Be sure to handle the header correctly. If you read the file without the header parameter, you may find that the column headers are included in the table rows.
+### Reporting
 
-* For each notebook (one dataset per notebook), complete the following:
-
-  * Count the number of records (rows) in the dataset.
-
-  * **Transform** the dataset to fit the tables in the [schema file](../Resources/schema.sql). Be sure the DataFrames match in data type and in column name.
-
-  * **Load** the DataFrames that correspond to tables into an RDS instance. **Note:** This process can take up to 10 minutes for each. Be sure that everything is correct before uploading.
-
-### Level 2 (Optional)
-
-In Amazon's Vine program, reviewers receive free products in exchange for reviews.
-
-  ![vine01.png](../Images/vine01.png)
-
-Amazon has several policies to reduce the bias of its Vine reviews: [https://www.amazon.com/gp/vine/help?ie=UTF8](https://www.amazon.com/gp/vine/help?ie=UTF8).
-
-But are Vine reviews truly trustworthy? Your task is to investigate whether Vine reviews are free of bias. Use either PySpark or—for an extra challenge—SQL to analyze the data.
-
-* If you choose to use SQL, first use Spark on ZEPL to extract and transform the data and load it into a SQL table on your RDS account. Perform your analysis with SQL queries on RDS.
-
-* While there are no hard requirements for the analysis, consider steps you can take to reduce noisy data, e.g., filtering for reviews that meet a certain number of helpful votes, total votes, or both.
-
-* Submit a summary of your findings and analysis.
+* Create a README that reports a comparison of each model's performance as well as a summary about your findings and any assumptions you can make based on your model (is your model good enough to predict new exoplanets? Why or why not? What would make your model be better at predicting new exoplanets?).
 
 - - -
 
 ## Resources
 
-[customer review datasets](https://s3.amazonaws.com/amazon-reviews-pds/tsv/index.txt)
+* [Exoplanet Data Source](https://www.kaggle.com/nasa/kepler-exoplanet-search-results)
+
+* [Scikit-Learn Tutorial Part 1](https://www.youtube.com/watch?v=4PXAztQtoTg)
+
+* [Scikit-Learn Tutorial Part 2](https://www.youtube.com/watch?v=gK43gtGh49o&t=5858s)
+
+* [Grid Search](https://scikit-learn.org/stable/modules/grid_search.html)
 
 - - -
 
 ## Hints and Considerations
 
-* Consult the troubleshooting guide for handling issues with ZEPL.
+* Start by cleaning the data, removing unnecessary columns, and scaling the data.
 
-* Be sure that every cell begins with `%pyspark` in ZEPL. This specifies the interpreter, and you must have one for each cell. If you import a Jupyter notebook in ZEPL, be sure to delete `%python`, which is automatically added to each cell.
+* Not all variables are significant be sure to remove any insignificant variables.
+
+* Make sure your `sklearn` package is up to date.
+
+* Try a simple model first, and then tune the model using `GridSearch`.
 
 - - -
 
 ## Submission
 
-* Copy your ZEPL notebooks into Jupyter Notebooks and upload those to GitHub.
+* Create a Jupyter Notebook for each model and host the notebooks on GitHub.
 
-* Copy your SQL queries into `.sql` files and upload to GitHub.
+* Create a file for your best model and push to GitHub
 
-* **Important:** Do not upload notebooks that contain your RDS password and endpoint. Be sure to delete them before making your notebook public!
+* Include a README.md file that summarizes your assumptions and findings.
+
+* Submit the link to your GitHub project to Bootcamp Spot.
 
 * Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
 
-- - -
-
-### Copyright
-
-Trilogy Education Services © 2019. All Rights Reserved.
+##### © 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
